@@ -1,14 +1,26 @@
 
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import ProductCard from './components/productCard'
+import AdminPage from './pages/adminPage'
+import HomePage from './pages/homePage'
+import TestPage from './pages/testPage'
 
 function App() {
  
 
   return (
-    <>
-      <ProductCard name="apple ipad" price="100000" image="https://www.google.com/url?sa=i&url=https%3A%2F%2Fidealz.lk%2Fproduct%2Fapple-ipad-11th-gen-wifi-only%2F&psig=AOvVaw2ZNwbgYXK5YK7rARdr83OV&ust=1762456472264000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCND2_8_c25ADFQAAAAAdAAAAABAE"></ProductCard>
-    </>
+    <BrowserRouter>
+      <div className='w-full h-[100vh]'>
+        <Routes path="/">
+          <Route path="/*" element={<HomePage/>}/>
+          <Route path="/register" element={<h1>Register page</h1>}/>
+          <Route path="/admin/*" element={<AdminPage/>}/>
+          <Route path="/test" element={<TestPage/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
+    
   )
 }
 
