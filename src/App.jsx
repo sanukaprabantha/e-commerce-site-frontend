@@ -13,6 +13,7 @@ function App() {
     <BrowserRouter>
       <div className='w-full h-[100vh]'>
         <Routes path="/">
+        <h1>hello</h1>
           <Route path="/*" element={<HomePage/>}/>
           <Route path="/register" element={<h1>Register page</h1>}/>
           <Route path="/admin/*" element={<AdminPage/>}/>
