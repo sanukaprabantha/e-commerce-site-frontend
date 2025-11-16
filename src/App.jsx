@@ -5,6 +5,7 @@ import ProductCard from './components/productCard'
 import AdminPage from './pages/adminPage'
 import HomePage from './pages/homePage'
 import TestPage from './pages/testPage'
+import LoginPage from './pages/loginPage'
 
 function App() {
  
@@ -13,8 +14,8 @@ function App() {
     <BrowserRouter>
       <div className='w-full h-[100vh]'>
         <Routes path="/">
-        <h1>hello</h1>
           <Route path="/*" element={<HomePage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
           <Route path="/register" element={<h1>Register page</h1>}/>
           <Route path="/admin/*" element={<AdminPage/>}/>
           <Route path="/test" element={<TestPage/>}/>
