@@ -1,19 +1,37 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const [emalil, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate=useNavigate();
 
   async function login() {
-    const response = await axios.post(
+    try{
+      const response = await axios.post(
       import.meta.env.VITE_API_URL + "/api/users/login",
       {
-        email: emalil,
+        email: email,
         password: password,
       }
     );
-    console.log(response.data);
+
+    localStorage.setItem("token", response.data.token);
+    
+    const user=response.data.user;
+    if(user.role=="admin"){
+      navigate("/admin");
+      toast.success("Login successful!");
+    } else {
+      navigate("/");
+      toast.success("Login successful!");
+    }
+    }catch(e){
+      console.error("Login failed:", e);
+      toast.error("Login failed. Please check your credentials.");
+    }
   }
 
   return (
@@ -50,14 +68,14 @@ export default function LoginPage() {
           {/* Input Fields */}
           <div className="flex flex-col w-full gap-5">
             <input
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {setEmail(e.target.value)}}
               type="email"
               placeholder="Email Address"
               className="w-full h-12 px-4 rounded-xl bg-white/70 text-secondary shadow-md focus:outline-none focus:ring-2 focus:ring-accent transition-all"
             />
 
             <input
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {setPassword(e.target.value)}}
               type="password"
               placeholder="Password"
               className="w-full h-12 px-4 rounded-xl bg-white/70 text-secondary shadow-md focus:outline-none focus:ring-2 focus:ring-accent transition-all"
