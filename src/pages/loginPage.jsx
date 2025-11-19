@@ -35,7 +35,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="w-full h-screen bg-[url('/bgimg.jpg')] bg-cover bg-center flex items-center    relative">
+    <div className="w-full h-screen bg-[url('/bgimg.jpg')] bg-cover bg-center flex items-center  relative">
 
       {/* LEFT SIDE TEXT (only added part) */}
       <div className=" gap-8 flex flex-col  bg-secondary/40  w-[50%] h-full justify-center p-20">
