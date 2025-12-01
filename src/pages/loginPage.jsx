@@ -37,7 +37,7 @@ export default function LoginPage() {
   return (
     <div className="w-full h-screen bg-[url('/bgimg.jpg')] bg-cover bg-center flex items-center  relative">
 
-      {/* LEFT SIDE TEXT (only added part) */}
+      
       <div className=" gap-8 flex flex-col  bg-secondary/40  w-[50%] h-full justify-center p-20">
         <h1 className="text-5xl font-bold tracking-wide text-primary drop-shadow-xl ">
          <span className="text-[#757575]"> Crystal</span> <span className="text-accent">Beauty</span> <span className="text-[#757575]">Clear</span>
@@ -50,22 +50,22 @@ export default function LoginPage() {
 
       <div className="w-[50%] h-full  bg-secondary/40 flex items-center justify-end  relative">
 
-        {/* Right side / Login Card */}
+        
         <div className="w-full max-w-md mr-20 p-10 bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 flex flex-col items-center gap-4 absolute right-[100px] ">
 
-          {/* Logo */}
+        
           <img
             src="/logo.png"
             alt="CBC Logo"
             className="w-32 drop-shadow-xl"
           />
 
-          {/* Title */}
+        
           <h1 className="text-3xl font-semibold tracking-wide text-primary drop-shadow-md">
             Welcome Back
           </h1>
 
-          {/* Input Fields */}
+         
           <div className="flex flex-col w-full gap-5">
             <input
               onChange={(e) => {setEmail(e.target.value)}}
@@ -82,7 +82,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* Login Button */}
           <button
             onClick={login}
             className="w-40 h-12 rounded-xl bg-accent text-secondary font-semibold text-lg shadow-lg hover:bg-accent/80 hover:scale-105 active:scale-95 transition-all"
