@@ -4,6 +4,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { RiProductHuntLine } from "react-icons/ri";
 import AdminProductPage from "./adminProductPage";
 import AddProductPage from "./adminAddNewProduct";
+import UpdateProductPage from "./adminUpdateProduct";
 
 
 export default function AdminPage()
@@ -40,6 +41,7 @@ export default function AdminPage()
                         <Route path="/users" element={<h1>Users</h1>}/>
                         <Route path="/orders" element={<h1>Orders</h1>}/>  
                         <Route path="/addProduct" element={<AddProductPage/>}/>
+                        <Route path="/updateProduct" element={<UpdateProductPage/>}/>
                     </Routes>
                 </div>
                 

@@ -1,23 +1,24 @@
+import { createClient } from "@supabase/supabase-js"
 import { useState } from "react"
+
 export default function TestPage()
 {
-    const[count,setCount]=useState(150)
+    const[file,setFile]=useState(null)
+
+    async function uploadImage()
+    {
+       const link= await mediaUpload(file);
+       console.log(link);
+    }
     return(
     
         <div className=" w-full h-full flex justify-center items-center">
-            <div className="w-[500px] h-[500px] bg-amber-100 text-white flex justify-center items-center gap-[20px]">
-                <button onClick={()=>
-                    {
-                        setCount(200)
-                    }
-                } className="bg-accent w-[100px] h-[40px]">+</button>
-                <span className="text-accent text-5xl">{count}</span>
-                <button onClick={()=>
-                    {
-                        setCount(100)    
-                    }
-                } className="bg-accent w-[100px] h-[40px]">-</button>
-            </div>
+            <input type="file" onChange={
+                (e)=>{
+                    setFile(e.target.files[0])
+                }
+            }/>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={uploadImage}>Upload</button>
         </div>
     )
 }
