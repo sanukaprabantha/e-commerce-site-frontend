@@ -2,10 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaEdit, FaRegPlusSquare, FaRegTrashAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { Loader } from "../components/loader";
+import toast from "react-hot-toast";
 
 function ProductDeleteconfirm(props){
   const productid=props.productId;
   const close=props.close;
+  const refresh=props.refresh;
 
 function deleteProduct(){
   axios.delete(
@@ -16,9 +19,11 @@ function deleteProduct(){
       },
     }
   )
-  .then(() => {
+  .then((response) => {
     console.log("Product deleted successfully");
     close();
+    toast.success("Product deleted successfully");
+    refresh();
   })
   .catch((error) => {
     console.error("Failed to delete product", error);
@@ -32,7 +37,7 @@ function deleteProduct(){
             onClick={close}>
                 X
           </button>
-          <p className="text-xl font-semibold">Are you sure you want to delete the product with product ID {productid}?</p>
+          <p className="text-xl  font-semibold">Are you sure you want to delete the product with product ID {productid}?</p>
           <div className="flex flex-row gap-[100px]">
             <button className="w-[100px] bg-accent"
             onClick={deleteProduct}>
@@ -71,7 +76,7 @@ export default function AdminProductPage() {
     <div className="w-full h-full p-5 bg-primary">
        {
         //prop comes as a close function in call of component
-        isDeleteConfirmVisible && <ProductDeleteconfirm productId={productIdToDelete}  close={() => setIsDeleteConfirmVisible(false)} />
+        isDeleteConfirmVisible && <ProductDeleteconfirm refresh={() => setIsLoading(true)} productId={productIdToDelete}  close={() => setIsDeleteConfirmVisible(false)} />
        }
       <Link
         to="/admin/addProduct"
@@ -84,8 +89,8 @@ export default function AdminProductPage() {
         <div className="px-6 py-4 bg-secondary text-primary text-lg font-semibold">
           Product List
         </div>
-
-        {isLoading?<p>Loading</p>:
+      
+        {isLoading?<Loader/>:
         <table className="w-full text-center text-secondary">
           <thead className="bg-accent/40 text-secondary font-semibold">
             <tr>
