@@ -4,6 +4,7 @@ import toast from "react-hot-toast"
 import { useParams } from "react-router-dom"
 import { Loader } from "../components/loader"
 import ImageSlider from "../components/imageSlider"
+import { addToCart } from "../utils/cart"
 
 
 export default function ProductOverview(){
@@ -77,7 +78,12 @@ export default function ProductOverview(){
 
                     {/* Buttons */}
                     <div className="w-full flex gap-4 mt-4">
-                        <button className="flex-1 bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
+                        <button className="flex-1 bg-accent text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
+                            onClick={()=>{
+                                addToCart(product,1)
+                                toast.success("Added to cart")
+                            }}
+                        >
                         Add to Cart
                         </button>
 

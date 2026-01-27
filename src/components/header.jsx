@@ -1,3 +1,4 @@
+import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 export default function Header()
 {
@@ -10,6 +11,9 @@ export default function Header()
                     <Link to="/products">Products</Link>
                     <Link to="/about">About</Link> 
                     <Link to="/contact">Contact</Link>
+                </div>
+                <div>
+                    <Link to="/cart" className="h-full absolute right-0 text-3xl flex justify-center items-center"><IoCartOutline/></Link>
                 </div>
             </div>
         </div>   

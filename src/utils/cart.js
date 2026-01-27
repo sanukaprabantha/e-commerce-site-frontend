@@ -1,17 +1,18 @@
-export default loadCart()
+export default function loadCart()
 {
     let cartString=localStorage.getItem("cart"); // cart is stored as a JSON string
      
     if(cartString==null)
     {
         localStorage.setItem("cart","[]");
+       
     }
-    let  cart=JSON.parse(cartString);// convert the string(cartString) in local storage into array
-
+     let  cart=JSON.parse(cartString);// convert the string(cartString) in local storage into array
+   
     return cart;
+   
 }
-
-export function addToCart(productId,quantity){
+export function addToCart(product,quantity){
     const cart = loadCart();
     const existingItemIndex = cart.findIndex(
         (item )=> {
@@ -49,4 +50,14 @@ export function addToCart(productId,quantity){
         }
     }
     localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+export function getTotal()
+{
+    const cart = loadCart()
+    let total=0
+    cart.forEach((item)=>{
+        total += item.price * item.quantity;
+    })
+    return total;
 }
