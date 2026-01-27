@@ -13,7 +13,7 @@ export default function loadCart()
    
 }
 export function addToCart(product,quantity){
-    const cart = loadCart();
+    let cart = loadCart();
     const existingItemIndex = cart.findIndex(
         (item )=> {
             return item.productId === product.productId
@@ -41,7 +41,7 @@ export function addToCart(product,quantity){
         const existingItem = cart[existingItemIndex];
         const newQuantity = existingItem.quantity + quantity;
         if(newQuantity<1){
-            cart = cart.fileter((item)=>{
+            cart = cart.filter((item)=>{
                 return item.productId !== product.productId
             });
         }
