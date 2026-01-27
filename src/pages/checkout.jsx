@@ -2,11 +2,12 @@ import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import loadCart, { addToCart, getTotal } from "../utils/cart";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-export default function CartPage()
+export default function CheckoutPage()
 {
-    const [cart,setCart] = useState(loadCart());
+    const location = useLocation();
+    const [cart,setCart] = useState(location.state)
 
 
     return(
@@ -63,14 +64,14 @@ export default function CartPage()
                     </div>
 
                     {/* Checkout Button */}
-                    <Link state={cart}
+                    <button
                         to="/checkout"
                         className="bg-accent text-white px-8 py-4 rounded-2xl font-semibold text-lg
                                 shadow-md hover:shadow-xl hover:bg-accent/90
                                 transition-all duration-300"
                     >
-                        Proceed to Checkout →
-                    </Link>
+                      Order
+                    </button>
 
                 </div>
 

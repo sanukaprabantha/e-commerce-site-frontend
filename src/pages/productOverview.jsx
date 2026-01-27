@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
-import { useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { Loader } from "../components/loader"
 import ImageSlider from "../components/imageSlider"
 import { addToCart } from "../utils/cart"
@@ -87,9 +87,19 @@ export default function ProductOverview(){
                         Add to Cart
                         </button>
 
-                        <button className="flex-1 bg-secondary text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-                        Buy Now
-                        </button>
+                        <Link
+                            to="/checkout"
+                            state={[{
+                                image: product.images[0],
+                                name: product.name,
+                                productId: product.productId,
+                                price: product.labelPrice,
+                                quantity: 1
+                            }]}
+                            className="flex-1 bg-secondary text-white py-3 rounded-xl font-semibold hover:opacity-90 transition flex justify-center items-center">
+                            Buy Now
+                        </Link>
+
                     </div>
 
                     </div>
