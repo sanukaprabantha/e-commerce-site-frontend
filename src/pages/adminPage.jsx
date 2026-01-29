@@ -5,6 +5,7 @@ import { RiProductHuntLine } from "react-icons/ri";
 import AdminProductPage from "./adminProductPage";
 import AddProductPage from "./adminAddNewProduct";
 import UpdateProductPage from "./adminUpdateProduct";
+import AdminOrdersPage from "./adminOrdersPage";
 
 
 export default function AdminPage()
@@ -39,7 +40,7 @@ export default function AdminPage()
                         <Route path="/" element={<h1>Dashboard</h1>}/>
                         <Route path="/products" element={<AdminProductPage/>}/>
                         <Route path="/users" element={<h1>Users</h1>}/>
-                        <Route path="/orders" element={<h1>Orders</h1>}/>  
+                        <Route path="/orders" element={<AdminOrdersPage/>}/>  
                         <Route path="/addProduct" element={<AddProductPage/>}/>
                         <Route path="/updateProduct" element={<UpdateProductPage/>}/>
                     </Routes>
