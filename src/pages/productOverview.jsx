@@ -27,17 +27,20 @@ export default function ProductOverview(){
             })
         },[])
     return(
-        <div className="w-full h-[calc(100vh-180px)]">
+        <div className="w-full lg:h-[calc(100vh-180px)]">
             {
                 status == "loading" && <Loader/>
             }
             {
                 status == "success" && 
-                <div className="w-full h-full  flex">
-                    <div className="w-[50%] h-full flex justify-center items-center">
+                <div className="w-full   flex flex-col lg:flex-row p-10 lg:p-0">
+                    <h1 className="text-3xl font-extrabold text-center text-secondary leading-snug lg:hidden">
+                        {product.name}
+                    </h1>
+                    <div className="w-full lg:w-[50%] h-full flex justify-center items-center">
                         <ImageSlider images={product.images}/>
                     </div>
-                    <div className="w-[50%] h-full flex flex-col items-center gap-6 p-12 bg-white rounded-2xl shadow-lg">
+                    <div className="w-full  lg:w-[50%] flex flex-col items-center gap-6 p-12 bg-white rounded-2xl shadow-lg">
   
                     {/* Product ID */}
                     <span className="text-sm tracking-widest text-secondary/60">
