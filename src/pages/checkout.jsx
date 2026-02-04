@@ -9,6 +9,8 @@ export default function CheckoutPage() {
   const location = useLocation();
   const [cart, setCart] = useState(location.state);
   const navigate = useNavigate();
+  const [address,setAddress]=useState("");
+  const [name,setName]=useState("");
 
   function getTotal() {
     let total = 0;
@@ -37,7 +39,8 @@ export default function CheckoutPage() {
       await axios.post(
         import.meta.env.VITE_API_URL + "/api/orders",
         {
-          address: "haliela,badulla",
+          address:address,
+          customerName:name==""?null:name,
           items: items,
         },
         {
@@ -62,7 +65,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="w-full lg:h-[calc(100vh-100px)] bg-primary flex flex-col pt-[25px] items-center p-12 gap-6">
+    <div className="w-full lg:h-[calc(100vh-100px)] bg-primary flex flex-col pt-[25px] items-center p-12 gap-6 overflow-y-scroll">
       <div className="w-[300px] lg:w-[400px] flex flex-col gap-6">
         {cart.map((item, index) => {
           return (
@@ -127,12 +130,54 @@ export default function CheckoutPage() {
           );
         })}
 
+        <div className="w-full lg:w-full  bg-white rounded-2xl shadow-lg
+                     flex flex-col  justify-center items-center
+                     gap-4 px-8">
+            <div className="w-full flex flex-col gap-2 p-4 bg-white rounded-xl shadow-sm">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-secondary"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your full name"
+                  className="w-full h-[50px] border border-secondary/40 rounded-lg px-4 
+                            focus:outline-none focus:ring-2 focus:ring-secondary/40 
+                            transition"
+                />
+            </div>
+
+            <div className="w-full flex flex-col gap-2 p-4 bg-white rounded-xl shadow-sm">
+                <label
+                  htmlFor="address"
+                  className="text-sm font-medium text-secondary"
+                >
+                  Shipping Address
+                </label>
+                <textarea
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="House No, Street, City, Postal Code"
+                  className="w-full h-[150px] border border-secondary/40 rounded-lg px-4 py-3 
+                            resize-none focus:outline-none focus:ring-2 focus:ring-secondary/40 
+                            transition"
+                />
+            </div>
+            
+
+        </div>
+
         {/* Total Section */}
         <div
           className="w-[300px] lg:w-full h-[200px] bg-white rounded-2xl shadow-lg
                      flex flex-col lg:flex-row justify-center items-center
-                     gap-4 px-8"
-        >
+                     gap-4 px-8">
           <div className="flex flex-col text-center">
             <span className="text-sm text-secondary uppercase tracking-wide">
               Total Amount
