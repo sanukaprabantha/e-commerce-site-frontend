@@ -1,4 +1,4 @@
-import { Link,Route, Routes } from "react-router-dom";
+import { Link,Route, Routes, useNavigate } from "react-router-dom";
 import { FaChartLine, FaRegUser} from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { RiProductHuntLine } from "react-icons/ri";
@@ -6,10 +6,44 @@ import AdminProductPage from "./adminProductPage";
 import AddProductPage from "./adminAddNewProduct";
 import UpdateProductPage from "./adminUpdateProduct";
 import AdminOrdersPage from "./adminOrdersPage";
+import { useEffect } from "react";
+import { Loader } from "../components/loader";
 
 
 export default function AdminPage()
 {
+
+    const [userLoaded,setUserLoaded]=useState(false);   
+    const navigate=useNavigate();
+
+    useEffect(()=>{
+
+        const token=localStorage.getItem("token");
+        if(!token)
+        {
+            toast.error("Please login to access admin panel.");
+            navigaate("/login");
+            return;
+        }
+        axios.get(import.meta.env.VITE_API_URL+"/api/auth/me",{
+            headers:{
+                Authorization:`Bearer ${token}`,
+            },
+        }).then((response)=>{
+            if(response.data.role!=="admin")
+            {
+                toast.error("You are not authorized to access admin panel.");
+                navigate("/");
+                return;
+            }
+            setUserLoaded(true);
+        }).catch((error)=>{
+            toast.error("Failed to load user data.");
+            localStorage.removeItem("token");
+            navigate("/login");
+        })
+    },[])
+
     return(
         <div className="w-full h-full bg-accent flex p-2">
             <div className="w-[300px] h-full bg-accent gap-[20px]">
@@ -36,14 +70,14 @@ export default function AdminPage()
             </div>
             <div className="w-[calc(100%-300px)] h-full bg-primary rounded-2xl overflow-hidden">
                 <div className="w-full h-full max-w-full max-h-full overflow-y-scroll">
-                    <Routes path="/">
+                    {userLoaded?<Routes path="/">
                         <Route path="/" element={<h1>Dashboard</h1>}/>
                         <Route path="/products" element={<AdminProductPage/>}/>
                         <Route path="/users" element={<h1>Users</h1>}/>
                         <Route path="/orders" element={<AdminOrdersPage/>}/>  
                         <Route path="/addProduct" element={<AddProductPage/>}/>
                         <Route path="/updateProduct" element={<UpdateProductPage/>}/>
-                    </Routes>
+                    </Routes>:<Loader/>}
                 </div>
                 
             </div>
