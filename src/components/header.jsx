@@ -50,7 +50,7 @@ export default function Header()
                     <Link to="/about">About</Link> 
                     <Link to="/contact">Contact</Link>
                 </div>
-                <div className=" h-full w-[200px] absolute right-[100px] ">
+                <div className=" h-full hidden lg:flex w-[200px] absolute right-[100px] flex justify-center items-center">
                     <UserData/>
                 </div>
                 <div className="hidden lg:flex">
