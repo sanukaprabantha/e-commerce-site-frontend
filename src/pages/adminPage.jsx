@@ -6,8 +6,9 @@ import AdminProductPage from "./adminProductPage";
 import AddProductPage from "./adminAddNewProduct";
 import UpdateProductPage from "./adminUpdateProduct";
 import AdminOrdersPage from "./adminOrdersPage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Loader } from "../components/loader";
+import axios from "axios";
 
 
 export default function AdminPage()
